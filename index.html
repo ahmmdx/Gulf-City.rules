@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gulf City RP | قوانين السيرفر</title>
+
+  <meta name="description" content="القوانين الرسمية لسيرفر Gulf City RP">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Cairo", sans-serif;
+      background: #05090b;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ================= BACKGROUND ================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      overflow: hidden;
+      background: #05090b;
+    }
+
+    .background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(5px) brightness(.38);
+      transform: scale(1.06);
+    }
+
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,.72),
+          rgba(0,0,0,.35) 40%,
+          rgba(0,0,0,.88)
+        );
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -5;
+      opacity: .035;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    }
+
+    /* ================= NAVBAR ================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 100;
+
+      height: 78px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 6%;
+
+      background: rgba(5, 12, 14, .72);
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(65, 255, 224, .12);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 900;
+    }
+
+    .nav-logo img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-size: 18px;
+      letter-spacing: .5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,.78);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: #5fffe5;
+    }
+
+    .discord-small {
+      padding: 10px 18px;
+      border-radius: 12px;
+      color: #04110f !important;
+      background: #5fffe5;
+      box-shadow: 0 0 25px rgba(95,255,229,.18);
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      padding: 130px 20px 80px;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero-logo {
+      width: min(230px, 55vw);
+      margin-bottom: 24px;
+      filter:
+        drop-shadow(0 0 25px rgba(95,255,229,.22));
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 8px 16px;
+      border: 1px solid rgba(95,255,229,.22);
+      background: rgba(95,255,229,.06);
+      border-radius: 999px;
+
+      color: #75ffe8;
+      font-size: 13px;
+      font-weight: 700;
+
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -3px;
+
+      background: linear-gradient(
+        120deg,
+        #ffffff,
+        #bafff5,
+        #5fffe5
+      );
+
+      -webkit-background-clip: text;
+      color: transparent;
+
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+
+      color: rgba(255,255,255,.68);
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 170px;
+      padding: 14px 24px;
+
+      border-radius: 14px;
+      text-decoration: none;
+
+      font-size: 14px;
+      font-weight: 800;
+
+      transition: .25s;
+    }
+
+    .btn-main {
+      background: #5fffe5;
+      color: #03100e;
+      box-shadow: 0 10px 40px rgba(95,255,229,.14);
+    }
+
+    .btn-main:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 45px rgba(95,255,229,.25);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.045);
+      color: white;
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-outline:hover {
+      transform: translateY(-3px);
+      border-color: rgba(95,255,229,.4);
+    }
+
+    /* ================= SECTION ================= */
+
+    section {
+      padding: 100px 7%;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title small {
+      color: #5fffe5;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 5vw, 52px);
+      margin-top: 8px;
+      font-weight: 900;
+    }
+
+    .section-title p {
+      color: rgba(255,255,255,.55);
+      margin-top: 10px;
+    }
+
+    /* ================= SEARCH ================= */
+
+    .search-box {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 17px 20px;
+
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+
+      outline: none;
+
+      color: white;
+      background: rgba(255,255,255,.055);
+
+      backdrop-filter: blur(14px);
+
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .search-box input:focus {
+      border-color: rgba(95,255,229,.4);
+    }
+
+    /* ================= RULE CARDS ================= */
+
+    .rules-container {
+      max-width: 1000px;
+      margin: auto;
+
+      display: grid;
+      gap: 14px;
+    }
+
+    .rule-card {
+      background: rgba(8, 18, 20, .65);
+      border: 1px solid rgba(255,255,255,.08);
+
+      border-radius: 18px;
+      overflow: hidden;
+
+      backdrop-filter: blur(16px);
+
+      transition: .3s;
+    }
+
+    .rule-card:hover {
+      border-color: rgba(95,255,229,.2);
+    }
+
+    .rule-head {
+      width: 100%;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 21px 24px;
+
+      border: none;
+      background: transparent;
+      color: white;
+
+      cursor: pointer;
+      text-align: right;
+
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .rule-head span:first-child {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .number {
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      color: #5fffe5;
+      background: rgba(95,255,229,.08);
+
+      font-size: 12px;
+    }
+
+    .arrow {
+      color: #5fffe5;
+      transition: .3s;
+    }
+
+    .rule-card.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    .rule-content {
+      max-height: 0;
+      overflow: hidden;
+
+      transition: max-height .35s ease;
+    }
+
+    .rule-content-inner {
+      padding: 0 24px 24px;
+      color: rgba(255,255,255,.66);
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .rule-content-inner ol,
+    .rule-content-inner ul {
+      padding-right: 22px;
+    }
+
+    .rule-content-inner li {
+      margin-bottom: 8px;
+    }
+
+    /* ================= PRICES ================= */
+
+    .price-wrapper {
+      max-width: 1050px;
+      margin: auto;
+
+      overflow-x: auto;
+
+      background: rgba(8,18,20,.62);
+      border: 1px solid rgba(255,255,255,.08);
+
+      border-radius: 18px;
+      backdrop-filter: blur(16px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th,
+    td {
+      padding: 16px 20px;
+      text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    th {
+      color: #5fffe5;
+      background: rgba(95,255,229,.035);
+      font-size: 13px;
+    }
+
+    td {
+      color: rgba(255,255,255,.7);
+      font-size: 14px;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* ================= INFO GRID ================= */
+
+    .info-grid {
+      max-width: 1050px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .info-card {
+      padding: 28px;
+
+      border-radius: 20px;
+
+      background: rgba(8,18,20,.62);
+      border: 1px solid rgba(255,255,255,.08);
+
+      backdrop-filter: blur(16px);
+    }
+
+    .info-card h3 {
+      color: #5fffe5;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: rgba(255,255,255,.65);
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .info-card ul {
+      padding-right: 20px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      padding: 60px 20px;
+      text-align: center;
+
+      border-top: 1px solid rgba(255,255,255,.07);
+      background: rgba(3,8,9,.75);
+    }
+
+    footer img {
+      width: 90px;
+      margin-bottom: 15px;
+    }
+
+    footer h3 {
+      font-size: 20px;
+    }
+
+    footer p {
+      color: rgba(255,255,255,.45);
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    /* ================= MUSIC ================= */
+
+    #musicToggle {
+      position: fixed;
+      left: 22px;
+      bottom: 22px;
+
+      width: 48px;
+      height: 48px;
+
+      border-radius: 15px;
+
+      border: 1px solid rgba(95,255,229,.25);
+
+      background: rgba(5,15,16,.78);
+      color: #5fffe5;
+
+      backdrop-filter: blur(15px);
+
+      cursor: pointer;
+
+      z-index: 200;
+
+      font-size: 18px;
+    }
+
+    #musicToggle:hover {
+      background: rgba(95,255,229,.1);
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 700px) {
+
+      nav {
+        height: 68px;
+        padding: 0 18px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-logo img {
+        width: 44px;
+        height: 44px;
+      }
+
+      .hero {
+        padding-top: 110px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      section {
+        padding: 75px 18px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rule-head {
+        padding: 18px;
+        font-size: 14px;
+      }
+
+      .rule-content-inner {
+        padding: 0 18px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= BACKGROUND VIDEO ================= -->
+
+  <div class="background">
+    <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+      <source src="assets/gulf-city-cinematic.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="noise"></div>
+
+  <!-- ================= MUSIC ================= -->
+
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="assets/gulf-city-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicToggle" title="تشغيل / إيقاف الموسيقى">
+    ♫
+  </button>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav>
+
+    <a href="#" class="nav-logo">
+      <img src="assets/gulf-city-logo-cropped.png" alt="Gulf City">
+      <span>GULF CITY RP</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#rules">القوانين</a>
+      <a href="#prices">أسعار الرهائن</a>
+      <a href="#safe">المناطق الآمنة</a>
+
+      <a
+        href="https://discord.gg/g-c"
+        target="_blank"
+        class="discord-small">
+        دخول السيرفر
+      </a>
+    </div>
+
+  </nav>
+
+  <!-- ================= HERO ================= -->
+
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <img
+        src="assets/gulf-city-logo-cropped.png"
+        class="hero-logo"
+        alt="Gulf City RP">
+
+      <div class="badge">
+        GULF CITY ROLEPLAY
+      </div>
+
+      <h1>
+        قـوانـيـن<br>
+        Gulf City
+      </h1>
+
+      <p>
+        أهلاً بك في الصفحة الرسمية لقوانين
+        Gulf City RP.
+        اقرأ القوانين والتزم بها للحفاظ على تجربة
+        رول بلاي ممتعة وعادلة للجميع.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#rules" class="btn btn-main">
+          استعراض القوانين
+        </a>
+
+        <a
+          href="https://discord.gg/g-c"
+          target="_blank"
+          class="btn btn-outline">
+          دخول الديسكورد
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- ================= RULES ================= -->
+
+  <section id="rules">
+
+    <div class="section-title">
+      <small>GULF CITY RULES</small>
+      <h2>القوانين العامة</h2>
+      <p>اضغط على أي قسم لعرض تفاصيل القوانين.</p>
+    </div>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="ابحث عن قانون...">
+    </div>
+
+    <div class="rules-container" id="rulesContainer">
+
+      <!-- 01 -->
+
+      <div class="rule-card">
+
+        <button class="rule-head">
+
+          <span>
+            <span class="number">01</span>
+            قوانين الرهائن
+          </span>
+
+          <span class="arrow">⌄</span>
+
+        </button>
+
+        <div class="rule-content">
+
+          <div class="rule-content-inner">
+
+            <ol>
+              <li>يمنع إهانة أو ضرب الرهينة.</li>
+              <li>يجب احترام الرهينة طوال السيناريو.</li>
+              <li>يجب تقدير حياة الرهينة وعدم تعريضها للخطر بدون سبب.</li>
+              <li>يمنع إعدام الرهينة بشكل عشوائي في حال عدم وجود عداوة.</li>
+              <li>في حال إعطاء المفاوض الأمان لرؤية الرهينة يمنع خطفه أو قتله.</li>
+              <li>يجب التفاوض مباشرة عند احتجاز الرهينة.</li>
+              <li>يمنع أخذ الرهينة إلى مكان مجهول بدون سبب RP منطقي.</li>
+              <li>في حال مرور ساعتين بدون أي إجراء يجب إطلاق سراح الرهينة.</li>
+            </ol>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 02 -->
+
+      <div class="rule-card">
+
+        <button class="rule-head">
+
+          <span>
+            <span class="number">02</span>
+            قوانين الهروب الآمن
+          </span>
+
+          <span class="arrow">⌄</span>
+
+        </button>
+
+        <div class="rule-content">
+
+          <div class="rule-content-inner">
+
+            <ol>
+              <li>يمنع الهروب بدون سبب أو سيناريو RP واضح.</li>
+              <li>يجب إعطاء الطرف الآخر فرصة عادلة للتفاعل.</li>
+              <li>يمنع استغلال الأخطاء أو الـ Glitches.</li>
+              <li>يمنع تغيير المركبة أو الملابس بطريقة غير منطقية للهروب.</li>
+              <li>يمنع الخروج من السيرفر أو استخدام طرق خارج RP للهروب من النتيجة.</li>
+              <li>يجب تطبيق FearRP والمحافظة على حياة الشخصية.</li>
+              <li>يمنع استخدام المناطق الآمنة للهروب أو إلغاء السيناريو.</li>
+              <li>بعد انتهاء مدة الهروب يجب التوقف واتباع تعليمات الإدارة.</li>
+            </ol>
+
+            <br>
+
+            <strong>مدة الهروب:</strong>
+
+            <ul>
+              <li>بدون رهائن: 40 ثانية.</li>
+              <li>مع وجود رهائن: دقيقتان و30 ثانية.</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 03 -->
+
+      <div class="rule-card">
+
+        <button class="rule-head">
+
+          <span>
+            <span class="number">03</span>
+            قوانين الشكاوى
+          </span>
+
+          <span class="arrow">⌄</span>
+
+        </button>
+
+        <div class="rule-content">
+
+          <div class="rule-content-inner">
+
+            <ol>
+              <li>لا تقبل الشكاوى التي مر عليها أكثر من ساعتين.</li>
+              <li>يتم استدعاء الطرفين قبل اتخاذ الإجراء.</li>
+              <li>في حال عدم حضور أحد الأطراف وعدم وجود تسجيل لمدة 30 دقيقة يتم اتخاذ الإجراء مباشرة.</li>
+              <li>يجب الاحتفاظ بتسجيل لمدة 30 دقيقة.</li>
+              <li>لا تقبل الشكوى بدون تسجيل من بداية السيناريو إلى نهايته.</li>
+              <li>يحق للإداري استدعاء اللاعب وطلب التسجيل.</li>
+              <li>عدم وجود التسجيل قد يؤدي إلى حظر لمدة 3 أيام.</li>
+            </ol>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 04 -->
+
+      <div class="rule-card">
+
+        <button class="rule-head">
+
+          <span>
+            <span class="number">04</span>
+            قوانين المناطق الآمنة
+          </span>
+
+          <span class="arrow">⌄</span>
+
+        </button>
+
+        <div class="rule-content">
+
+          <div class="rule-content-inner">
+
+            <ul>
+              <li>مراكز الشرطة.</li>
+              <li>المكاتب الحكومية.</li>
+              <li>المصانع.</li>
+              <li>أماكن التجميع.</li>
+              <li>ورش الإصلاح.</li>
+              <li>معارض المركبات.</li>
+              <li>السجن.</li>
+              <li>مكاتب الوظائف.</li>
+              <li>جميع المنشآت الحكومية.</li>
+              <li>المستشفى.</li>
+            </ul>
+
+            <br>
+
+            <p>
+              أي موقع يتواجد فيه مواطنون يعتبر منطقة آمنة،
+              ويمنع فيه القيام بأي نشاط إجرامي.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 05 -->
+
+      <div class="rule-card">
+
+        <button class="rule-head">
+
+          <span>
+            <span class="number">05</span>
+            الدروع والخوذ الثقيلة
+          </span>
+
+          <span class="arrow">⌄</span>
+
+        </button>
+
+        <div class="rule-content">
+
+          <div class="rule-content-inner">
+
+            <ul>
+              <li>يسمح باستخدامها في سرقة البنك المركزي.</li>
+              <li>يسمح بها عند اختطاف رتبة ملازم فأعلى.</li>
+              <li>يسمح بها عند وجود إنذار أمني.</li>
+              <li>يسمح بها في مداهمة المركز.</li>
+              <li>يجب أن يكون استخدامها بأمر من ضابط فأعلى.</li>
+              <li>لا تعتبر الدروع الثقيلة استخداماً دائماً.</li>
+              <li>يجب وجود سبب واضح لاستخدامها.</li>
+              <li>يمكن استخدامها في السيناريوهات الخاصة بقيادات العصابات أو القيادات العليا.</li>
+              <li>يمكن تعديل هذه القوانين حسب قرارات الإدارة.</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 06 -->
+
+      <div class="rule-card">
+
+        <button class="rule-head">
+
+          <span>
+            <span class="number">06</span>
+            قوانين الإعدام
+          </span>
+
+          <span class="arrow">⌄</span>
+
+        </button>
+
+        <div class="rule-content">
+
+          <div class="rule-content-inner">
+
+            <ol>
+              <li>يسمح باستخدام أي سلاح باستثناء أسلحة الـ Melee.</li>
+              <li>يمكن تنفيذ الإعدام في أي مكان داخل خريطة GTA، بما فيها البحر والجبال.</li>
+              <li>لا يتم احتساب العداوات التي حدثت خارج السيرفر.</li>
+              <li>يمنع الإعدام بدون وجود عداوة فعلية.</li>
+              <li>الخطف أو السلب أو السرقة فقط لا تعتبر سبباً كافياً للإعدام.</li>
+              <li>إذا قام شخص بتهديدك بالإعدام فيمكن تنفيذ الإعدام بحقه، بشرط وجود تسجيل صوتي إلزامي.</li>
+              <li>بعد تنفيذ الإعدام يجب إنهاء اللاعب بشكل كامل، وإلا لا يحتسب الإعدام.</li>
+            </ol>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= PRICES ================= -->
+
+  <section id="prices">
+
+    <div class="section-title">
+
+      <small>HOSTAGE PRICES</small>
+
+      <h2>أسعار الرهائن</h2>
+
+      <p>
+        الأسعار المعتمدة حسب رتبة أو وظيفة الرهينة.
+      </p>
+
+    </div>
+
+    <div class="price-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>الرتبة / الوظيفة</th>
+            <th>السعر</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr><td>مواطن / موظف</td><td>5,000$</td></tr>
+          <tr><td>عسكري</td><td>10,000$</td></tr>
+          <tr><td>جندي أول</td><td>15,000$</td></tr>
+          <tr><td>عريف</td><td>20,000$</td></tr>
+          <tr><td>وكيل رقيب</td><td>25,000$</td></tr>
+          <tr><td>رقيب</td><td>30,000$</td></tr>
+          <tr><td>رقيب أول</td><td>35,000$</td></tr>
+          <tr><td>رئيس رقباء</td><td>45,000$</td></tr>
+          <tr><td>ملازم</td><td>55,000$</td></tr>
+          <tr><td>ملازم أول</td><td>65,000$</td></tr>
+          <tr><td>نقيب</td><td>75,000$</td></tr>
+          <tr><td>رائد</td><td>85,000$</td></tr>
+          <tr><td>مقدم</td><td>100,000$</td></tr>
+          <tr><td>عقيد</td><td>110,000$</td></tr>
+          <tr><td>عميد</td><td>120,000$</td></tr>
+          <tr><td>لواء</td><td>130,000$</td></tr>
+          <tr><td>فريق</td><td>140,000$</td></tr>
+          <tr><td>فريق أول</td><td>160,000$</td></tr>
+          <tr><td>مستشار وزير الداخلية</td><td>180,000$</td></tr>
+          <tr><td>نائب وزير الداخلية</td><td>220,000$</td></tr>
+          <tr><td>وزير الداخلية</td><td>250,000$</td></tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- ================= EXTRA INFO ================= -->
+
+  <section id="safe">
+
+    <div class="section-title">
+
+      <small>IMPORTANT</small>
+
+      <h2>تنبيهات مهمة</h2>
+
+      <p>احرص على معرفة القوانين قبل دخول أي سيناريو.</p>
+
+    </div>
+
+    <div class="info-grid">
+
+      <div class="info-card">
+
+        <h3>تقدير الحياة</h3>
+
+        <p>
+          يجب على جميع اللاعبين تقدير حياة شخصياتهم
+          والتعامل مع المواقف الخطرة بشكل منطقي
+          ومتوافق مع RP.
+        </p>
+
+      </div>
+
+      <div class="info-card">
+
+        <h3>FearRP</h3>
+
+        <p>
+          يجب إظهار الخوف المناسب عند التعرض للتهديد
+          وعدم التصرف بطريقة غير منطقية.
+        </p>
+
+      </div>
+
+      <div class="info-card">
+
+        <h3>استغلال الثغرات</h3>
+
+        <p>
+          يمنع استغلال الأخطاء البرمجية أو الـ Glitches
+          للحصول على أفضلية غير عادلة.
+        </p>
+
+      </div>
+
+      <div class="info-card">
+
+        <h3>قرارات الإدارة</h3>
+
+        <p>
+          للإدارة الحق في اتخاذ الإجراء المناسب
+          عند وجود مخالفة أو حالة غير مذكورة
+          بشكل صريح في القوانين.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <img
+      src="assets/gulf-city-logo-cropped.png"
+      alt="Gulf City">
+
+    <h3>GULF CITY RP</h3>
+
+    <p>
+      جميع الحقوق محفوظة © Gulf City RP
+    </p>
+
+  </footer>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    /* ================= VIDEO ================= */
+
+    const bgVideo = document.getElementById("bgVideo");
+
+    function startVideo() {
+      bgVideo.play().catch(() => {});
+    }
+
+    window.addEventListener("load", startVideo);
+
+    document.addEventListener("click", startVideo, {
+      once: true
+    });
+
+
+    /* ================= ACCORDION ================= */
+
+    const cards = document.querySelectorAll(".rule-card");
+
+    cards.forEach(card => {
+
+      const button = card.querySelector(".rule-head");
+      const content = card.querySelector(".rule-content");
+
+      button.addEventListener("click", () => {
+
+        const isActive = card.classList.contains("active");
+
+        cards.forEach(otherCard => {
+
+          otherCard.classList.remove("active");
+
+          const otherContent =
+            otherCard.querySelector(".rule-content");
+
+          otherContent.style.maxHeight = null;
+
+        });
+
+        if (!isActive) {
+
+          card.classList.add("active");
+
+          content.style.maxHeight =
+            content.scrollHeight + "px";
+
+        }
+
+      });
+
+    });
+
+
+    /* ================= SEARCH ================= */
+
+    const searchInput =
+      document.getElementById("searchInput");
+
+    searchInput.addEventListener("input", function () {
+
+      const value =
+        this.value.trim().toLowerCase();
+
+      cards.forEach(card => {
+
+        const text =
+          card.innerText.toLowerCase();
+
+        if (text.includes(value)) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+    });
+
+
+    /* ================= MUSIC ================= */
+
+    const music =
+      document.getElementById("bgMusic");
+
+    const musicToggle =
+      document.getElementById("musicToggle");
+
+    let musicStarted = false;
+
+
+    function startMusic() {
+
+      music.volume = 0.35;
+
+      music.play()
+        .then(() => {
+
+          musicStarted = true;
+
+          musicToggle.textContent = "❚❚";
+
+        })
+        .catch(() => {
+
+          musicStarted = false;
+
+        });
+
+    }
+
+
+    window.addEventListener("load", () => {
+
+      startMusic();
+
+    });
+
+
+    document.addEventListener("click", () => {
+
+      if (!musicStarted) {
+        startMusic();
+      }
+
+    }, {
+      once: true
+    });
+
+
+    musicToggle.addEventListener("click", (event) => {
+
+      event.stopPropagation();
+
+      if (music.paused) {
+
+        music.play();
+
+        musicToggle.textContent = "❚❚";
+
+      } else {
+
+        music.pause();
+
+        musicToggle.textContent = "♫";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
