@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#030607">
+<title>Gulf City RP | القوانين الرسمية</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --bg: #030607;
+    --panel: rgba(10, 17, 19, 0.78);
+    --line: rgba(16, 232, 208, 0.25);
+    --t: #10e8d0;
+    --white: #f4fbfa;
+    --muted: #91a5a4;
+    --shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); }
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--white);
+    font-family: 'Cairo', Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* خلفية الفيديو المغبشة */
+.bg-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.bg-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(12px) brightness(0.35);
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(16,232,208,0.08), transparent 60%), rgba(3,6,7,0.75);
+    z-index: -1;
+}
+
+/* الهيدر والشعار */
+header {
+    text-align: center;
+    padding: 50px 20px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-img {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(16,232,208,0.4));
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0;
+    color: var(--white);
+    text-shadow: 0 0 20px rgba(16,232,208,0.3);
+}
+
+h1 span {
+    color: var(--t);
+}
+
+p.subtitle {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-top: 8px;
+}
+
+/* حاوية القوانين */
+.container {
+    max-width: 900px;
+    margin: 30px auto 60px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.rule-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.rule-card:hover {
+    border-color: var(--t);
+    transform: translateY(-3px);
+    box-shadow: 0 25px 60px rgba(16,232,208,0.15);
+}
+
+.rule-card h3 {
+    margin-top: 0;
+    color: var(--t);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rule-card ul {
+    margin: 10px 0 0 0;
+    padding-right: 20px;
+    color: var(--white);
+}
+
+.rule-card li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+/* زر التحكم بالموسيقى */
+#musicToggle {
+    position: fixed;
+    left: 25px;
+    bottom: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--t);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+}
+
+#musicToggle:hover {
+    background: var(--t);
+    color: var(--bg);
+}
+
+/* التذييل */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+</style>
+</head>
+<body>
+
+<!-- خلفية الفيديو -->
+<div class="bg-video-container">
+    <video autoplay muted loop playsinline>
+        <source src="background.mp4" type="video/mp4">
+        متصفحك لا يدعم عرض الفيديو.
+    </video>
+</div>
+<div class="overlay"></div>
+
+<!-- مشغل الموسيقى -->
+<audio id="bgMusic" preload="auto" loop>
+    <source src="gulf-city-music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" aria-label="تشغيل أو إيقاف الموسيقى">♫</button>
+
+<header>
+    <img src="gulf-city-logo.png" alt="Gulf City Logo" class="logo-img">
+    <h1>Gulf City <span>RP</span></h1>
+    <p class="subtitle">القوانين والأنظمة الرسمية للمدينة</p>
+</header>
+
+<div class="container">
+    <div class="rule-card">
+        <h3>⚖️ 1. القوانين العامة للمدينة</h3>
+        <ul>
+            <li>يجب إظهار احترام كامل لجميع اللاعبين والإداريين داخل وخارج اللعبة.</li>
+            <li>يمنع منعاً باتاً استغلال الأخطاء البرمجية (Glitches/Bugs)، ويجب إبلاغ الإدارة فوراً عنها.</li>
+            <li>يمنع استخدام أي برامج خارجية معدلة أو هكات (Cheats/Mods) تؤدي إلى إعطاء أفضلية غير قانونية.</li>
+        </ul>
+    </div>
+
+    <div class="rule-card">
+        <h3>🛑 2. قوانين الـ RP (تقمص الأدوار)</h3>
+        <ul>
+            <li>يجب الالتزام بتقمص الشخصية طوال فترة تواجدك في المدينة وعدم الخروج عنها (Fail RP).</li>
+            <li>مفهوم الـ (Value of Life): يجب الحفاظ على حياة شخصيتك والخوف عليها في المواقف الخطرة.</li>
+            <li>يمنع القتل العشوائي أو التعدي بدون سبب مقنع أو سيناريو RP مسبق (RDM / VDM).</li>
+        </ul>
+    </div>
+
+    <div class="rule-card">
+        <h3>🚨 3. قوانين العصابات والجهات الأمنية</h3>
+        <ul>
+            <li>يُمنع التعرض للمواطنين الآمنين أو سرقتهم في الأماكن الآمنة (Safe Zones).</li>
+            <li>يجب الالتزام بالحد الأقصى لأعداد أعضاء العصابات في العمليات والسرقات حسب قوانين المدينة.</li>
+            <li>يمنع منعاً باتاً إهانة الجثث أو التكلم عليها بعد الموت بطرق تقلل من قيمة الـ RP.</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    جميع الحقوق محفوظة &copy; 2026 Gulf City RP
+</footer>
+
+<script>
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+bgMusic.volume = 0.4;
+let musicStarted = false;
+
+function playMusic() {
+    if (!musicStarted) {
+        bgMusic.play().then(() => {
+            musicStarted = true;
+            musicToggle.textContent = '❚❚';
+        }).catch(() => {});
+    }
+}
+
+window.addEventListener('load', playMusic);
+document.addEventListener('pointerdown', playMusic, { once: true });
+
+musicToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+            musicStarted = true;
+            musicToggle.textContent = '❚❚';
+        });
+    } else {
+        bgMusic.pause();
+        musicToggle.textContent = '♫';
+    }
+});
+</script>
+
+</body>
+</html>
