@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golf City | القوانين</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-light: #14b8a6;
+      --teal-glow: #2dd4bf;
+      --teal-dark: #0f766e;
+      --bg-dark: #0a0f14;
+      --card-bg: rgba(15, 23, 32, 0.85);
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: rgba(13, 148, 136, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* Background Video */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.35) contrast(1.1);
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, 
+        rgba(10, 15, 20, 0.7) 0%, 
+        rgba(10, 15, 20, 0.85) 40%, 
+        rgba(10, 15, 20, 0.95) 100%);
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 15, 20, 0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 0.7rem 2rem;
+      background: rgba(10, 15, 20, 0.92);
+    }
+
+    .logo-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-nav img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .logo-nav span {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, var(--teal-light), var(--teal-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .join-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      color: white;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(13, 148, 136, 0.4);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(45, 212, 191, 0.3);
+    }
+
+    .join-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(13, 148, 136, 0.55);
+      background: linear-gradient(135deg, var(--teal-light), var(--teal));
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      position: relative;
+    }
+
+    .hero-logo-wrap {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-logo {
+      width: min(280px, 55vw);
+      height: auto;
+      filter: blur(8px) brightness(0.7);
+      opacity: 0.6;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(2.8rem, 8vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #fff 20%, var(--teal-glow) 50%, var(--teal-light) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(45, 212, 191, 0.3);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      max-width: 420px;
+    }
+
+    .hero-join {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: linear-gradient(135deg, var(--teal-light), var(--teal));
+      color: #0a0f14;
+      padding: 1rem 2.4rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      box-shadow: 0 0 40px rgba(13, 148, 136, 0.5), 0 8px 32px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+
+    .hero-join:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 0 60px rgba(45, 212, 191, 0.6), 0 12px 40px rgba(0,0,0,0.5);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      animation: bounce 2s infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* Main Content */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--teal-glow);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--teal), transparent);
+      margin: 0.6rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* Accordion */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .acc-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .acc-item:hover {
+      border-color: rgba(13, 148, 136, 0.45);
+    }
+
+    .acc-item.open {
+      border-color: var(--teal);
+      box-shadow: 0 0 24px rgba(13, 148, 136, 0.15);
+    }
+
+    .acc-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.35rem;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: right;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+
+    .acc-header:hover {
+      background: rgba(13, 148, 136, 0.08);
+    }
+
+    .acc-header .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(13, 148, 136, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+      color: var(--teal-light);
+      font-size: 1.1rem;
+    }
+
+    .acc-item.open .acc-header .icon {
+      background: var(--teal);
+      color: white;
+      transform: rotate(180deg);
+    }
+
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .acc-content {
+      padding: 0 1.35rem 1.4rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .acc-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .acc-content li {
+      position: relative;
+      padding: 0.55rem 0 0.55rem 0;
+      padding-right: 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .acc-content li:last-child {
+      border-bottom: none;
+    }
+
+    .acc-content li::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 1.05rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+    }
+
+    .acc-content strong, .acc-content b {
+      color: var(--teal-light);
+      font-weight: 600;
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .price-table th,
+    .price-table td {
+      padding: 0.55rem 0.8rem;
+      text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .price-table th {
+      color: var(--teal-light);
+      font-weight: 600;
+      background: rgba(13, 148, 136, 0.1);
+    }
+
+    .price-table tr:hover td {
+      background: rgba(13, 148, 136, 0.05);
+    }
+
+    .note {
+      margin-top: 1rem;
+      padding: 0.9rem 1.1rem;
+      background: rgba(13, 148, 136, 0.1);
+      border-right: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: rgba(10, 15, 20, 0.9);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer .logo-foot {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 0.6rem;
+      opacity: 0.8;
+    }
+
+    footer a {
+      color: var(--teal-light);
+      text-decoration: none;
+    }
+
+    /* Music control */
+    .music-toggle {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 90;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(13, 148, 136, 0.9);
+      border: 2px solid rgba(255,255,255,0.2);
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: all 0.25s;
+    }
+
+    .music-toggle:hover {
+      transform: scale(1.1);
+      background: var(--teal-light);
+    }
+
+    .music-toggle.muted {
+      background: rgba(50, 50, 60, 0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        padding: 0.8rem 1rem;
+      }
+      .hero {
+        padding: 5rem 1rem 3rem;
+      }
+      .hero-title {
+        font-size: 2.4rem;
+      }
+      .acc-header {
+        font-size: 0.95rem;
+        padding: 1rem 1.1rem;
+      }
+      .music-toggle {
+        bottom: 1rem;
+        left: 1rem;
+        width: 44px;
+        height: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="bg-video.mp4" type="video/mp4">
+  </video>
+  <div class="bg-overlay"></div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Header -->
+  <header id="header">
+    <a href="#" class="logo-nav">
+      <img src="logo.png" alt="Golf City">
+      <span>Golf City</span>
+    </a>
+    <a href="https://discord.gg/g-c" target="_blank" rel="noopener" class="join-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      الدخول إلى السيرفر
+    </a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-logo-wrap">
+      <img src="logo.png" alt="" class="hero-logo" aria-hidden="true">
+      <h1 class="hero-title">Golf City</h1>
+    </div>
+    <p class="hero-sub">قوانين السيرفر الرسمية — احترمها عشان نستمتع سوا</p>
+    <a href="https://discord.gg/g-c" target="_blank" rel="noopener" class="hero-join">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      الدخول إلى السيرفر
+    </a>
+    <div class="scroll-hint">
+      <span>↓</span>
+      <span>القوانين</span>
+    </div>
+  </section>
+
+  <!-- Rules -->
+  <main>
+    <h2 class="section-title">قوانين Golf City</h2>
+
+    <div class="accordion">
+
+      <!-- 1. قوانين الحرب -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>قوانين الحرب بين الدول</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <ul>
+              <li><strong>(1)</strong> يمنع سرقة أي عتاد عسكري مثل (المدافع / الخوذ).</li>
+              <li><strong>(2)</strong> يمنع مداهمة أي دولة إلا بالأسباب التالية (خطف أحد مواطنين الدولة الثانية أو خطف أحد عساكر الدولة الثانية / دخول حدود دولة من دولة أخرى / دخول شحنة لدولة أخرى / سيناريو مخطط).</li>
+              <li><strong>(3)</strong> في حال خطف أحد عساكر الدولة الثانية يمنع إعدامه إلا إذا كان رتبة من الضباط وفوق ويجب تنزيل إعلان.</li>
+              <li><strong>(4)</strong> في حال خطف أحد عساكر الدولة الثانية يجب التفاوض عليه ويمنع إبقائه من غير سيناريو.</li>
+              <li><strong>(5)</strong> يمنع المداهمة إلا في تواجد 6 أشخاص من الجهة المداهمة و 6 أشخاص من الجهة المتداهمة.</li>
+            </ul>
+            <div class="note">يرجى من عموم الأعضاء الالتزام بالقوانين التي بالأعلى لعدم محاسبتكم.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. بنود الرهائن -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>بنود الرهائن – القواعد التنظيمية</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <p style="margin-bottom:0.8rem;color:var(--text)">تؤكد رئاسة قولف أن هذه البنود وُضعت لحفظ حقوق الجهات واللاعبين، وتطبيقها يسهم في رفع مستوى الجودة داخل الرحلات.</p>
+            <ul>
+              <li><strong>1.</strong> حظر الإهانة: يمنع عليك إهانة الرهينة من حيث الضرب والسب.</li>
+              <li><strong>2.</strong> الاحترام الواجب: يجب عليك احترام الرهينة.</li>
+              <li><strong>3.</strong> تقدير الحياة: يجب عليك تقدير حياة الرهينة.</li>
+              <li><strong>4.</strong> حظر الإعدام العشوائي: يمنع عليك إعدام الرهينة في حال لا توجد عداوات.</li>
+              <li><strong>5.</strong> حقوق المفاوض: في حال إعطائك المفاوض الأمان لرؤية الرهينة يمنع عليك خطفه أو قتله.</li>
+              <li><strong>6.</strong> سرعة التفاوض: في حال لديك رهينة يجب التفاوض عليها فوراً.</li>
+              <li><strong>7.</strong> الأماكن المعلنة: يمنع عليك أخذ الرهينة إلى مكان مجهول.</li>
+              <li><strong>8.</strong> مدة الاحتجاز: إذا مرّ على الرهينة ساعتين من غير فعل أي شيء، فيها يتم إطلاق سراحها.</li>
+            </ul>
+            <div class="note">الالتزام إجباري. عدم الالتزام قد يؤدي إلى مساءلة إدارية.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. أسعار الرهائن -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>أسعار الرهائن الرسمية</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <table class="price-table">
+              <thead>
+                <tr><th>الفئة / الرتبة</th><th>السعر</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>المواطن أو الموظف</td><td>5,000</td></tr>
+                <tr><td>جندي</td><td>10,000</td></tr>
+                <tr><td>جندي أول</td><td>15,000</td></tr>
+                <tr><td>عريف</td><td>20,000</td></tr>
+                <tr><td>وكيل رقيب</td><td>25,000</td></tr>
+                <tr><td>رقيب</td><td>30,000</td></tr>
+                <tr><td>رقيب أول</td><td>35,000</td></tr>
+                <tr><td>رئيس رقباء</td><td>45,000</td></tr>
+                <tr><td>ملازم</td><td>55,000</td></tr>
+                <tr><td>ملازم أول</td><td>65,000</td></tr>
+                <tr><td>نقيب</td><td>75,000</td></tr>
+                <tr><td>رائد</td><td>85,000</td></tr>
+                <tr><td>مقدم</td><td>100,000</td></tr>
+                <tr><td>عقيد</td><td>110,000</td></tr>
+                <tr><td>عميد</td><td>120,000</td></tr>
+                <tr><td>لواء</td><td>130,000</td></tr>
+                <tr><td>فريق</td><td>140,000</td></tr>
+                <tr><td>فريق أول</td><td>160,000</td></tr>
+                <tr><td>مستشار وزير الداخلية</td><td>180,000</td></tr>
+                <tr><td>نائب وزير الداخلية</td><td>220,000</td></tr>
+                <tr><td>وزير الداخلية</td><td>250,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. نظام الهروب -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>تنظيم الهروب الآمن – نظام RP</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <ul>
+              <li><strong>1.</strong> يمنع بدء عملية الهروب بدون وجود سبب أو سيناريو واضح داخل الـRP.</li>
+              <li><strong>2.</strong> يجب إعطاء فرصة عادلة للطرف الآخر للتفاعل مع السيناريو وعدم إنهائه بشكل مفاجئ.</li>
+              <li><strong>3.</strong> يمنع استغلال الأخطاء أو الثغرات في النظام أثناء الهروب.</li>
+              <li><strong>4.</strong> يمنع تغيير المركبة أو الملابس بشكل غير منطقي للهروب من السيناريو.</li>
+              <li><strong>5.</strong> يمنع الخروج من السيرفر أو استخدام أي طريقة خارج الـRP لتجنب نتيجة السيناريو.</li>
+              <li><strong>6.</strong> يجب الالتزام بالـFearRP والمحافظة على واقعية الشخصية أثناء الهروب.</li>
+              <li><strong>7.</strong> يمنع استخدام المناطق الآمنة للهروب من السيناريو أو تعطيله.</li>
+              <li><strong>8.</strong> في حال انتهاء مدة الهروب المحددة، يجب إيقاف السيناريو والالتزام بتعليمات الإدارة.</li>
+            </ul>
+            <div class="note">
+              <strong>مدة الهروب:</strong><br>
+              • الهروب بدون رهائن: 40 ثانية<br>
+              • الهروب مع رهائن: 2:30 دقيقة
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. قوانين الشكاوي -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>قوانين الشكاوي</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <ul>
+              <li><strong>[1]</strong> يمنع فتح شكوى مرت عليها ساعتين كاملة.</li>
+              <li><strong>[2]</strong> الشكاوي تتم عن استدعاء الطرفين ثم اتخاذ الإجراء المناسب.</li>
+              <li><strong>[3]</strong> عدم حضورك وبدون تصويرك 30 دقيقة يتم محاسبتك بشكل فوري.</li>
+              <li><strong>[4]</strong> تجنباً للإحراج يجب على الجميع حفظ فيديو 30 دقيقة (يوتيوب أو حفظه) وتفك الكام عند الاستدعاء.</li>
+              <li><strong>[5]</strong> لن تُقبل شكواك في حال ما جبت تصوير من بداية الحالة إلى نهايتها.</li>
+              <li><strong>[6]</strong> يحق للإدارة استدعائك بأي وقت وطلب التصوير. عدم وجود التصوير = Banned 3 أيام.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Safe Zone -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>المناطق الآمنة (Safe Zone)</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <ul>
+              <li>قسم الشرطة (كل أقسام الشرطة آمنة)</li>
+              <li>جميع المكاتب الحكومية</li>
+              <li>موقع التصنيع</li>
+              <li>موقع التجميع</li>
+              <li>ورشات التصليح</li>
+              <li>معرض المركبات</li>
+              <li>السجن</li>
+              <li>مكتب الوظائف</li>
+              <li>جميع المرافق الحكومية</li>
+              <li>المستشفى</li>
+            </ul>
+            <div class="note">أي موقع يوجد فيه مواطنين يُعتبر آمناً ويمنع عليك فعل أي عمل إجرامي فيه.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. الثقيل والخوذ -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>قوانين الثقيل والخوذ</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <ul>
+              <li><strong>[1]</strong> يمنع استخدام الخوذ والثقيل إلا بالحالات التالية: سرقة بنك مركزي، خطف رتبة ملازم وما فوق، الاستنفار الأمني، مداهمة القسم.</li>
+              <li><strong>[2]</strong> يمنع استخدام الثقيل والخوذ بالحالات اللي فوق إلا بأمر من رتبة ضابط وفوق ليكون المسؤول عن جميع الأحداث.</li>
+              <li><strong>[3]</strong> يمنع استخدام الثقيل والخوذ بشكل دائم، فقط بحالات معينة.</li>
+              <li><strong>[4]</strong> يمنع استخدام الثقيل والخوذ بدون سبب واضح (مثل إمساك مجرم...).</li>
+              <li><strong>[5]</strong> في حال انمسك شخص من رئاسة العصابات (بوس عصابة، كو بوس، رئيس مافيا، نائب مافيا) فقط ذول اللي تطلع فيهم ثقيل وخوذة.</li>
+              <li><strong>[6]</strong> في حال كان فيه سيناريو احتلال... تطلع فيها ثقيل وخوذة.</li>
+              <li><strong>[7]</strong> في حال بينخطف قائد أو رتبة عليا في وزارة الداخلية أو العصابات → تطلع ثقيل وخوذة.</li>
+              <li><strong>[8]</strong> القوانين قابلة للتعديل.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. قوانين الإعدامات -->
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>قوانين الإعدامات</span>
+          <span class="icon">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">
+            <ul>
+              <li><strong>[1]</strong> يسمح الإعدام بأي سلاح كان إلا الأسلحة البيضاء.</li>
+              <li><strong>[2]</strong> يسمح الإعدام بأي مكان كان في خريطة قراند ولو بالبحر أو الجبال.</li>
+              <li><strong>[3]</strong> يمنع استخدام العداوات من سيرفرات أخرى.</li>
+              <li><strong>[4]</strong> يمنع إعدام شخص ما بينك وبينه عداوة أو بسبب إنه خطفك أو لوتك أو سرقك.</li>
+              <li><strong>[5]</strong> يسمح بأنك تعدم شخص هددك بالإعدام ولكن يجب وجود دليل صوتي (ملزم).</li>
+              <li><strong>[6]</strong> يجب بعد إعدامه تفنيشه وإلا ما يحسب الإعدام.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <img src="logo.png" alt="Golf City" class="logo-foot">
+    <p>© 2026 Golf City — جميع الحقوق محفوظة</p>
+    <p style="margin-top:0.4rem"><a href="https://discord.gg/g-c" target="_blank">انضم للسيرفر</a></p>
+  </footer>
+
+  <!-- Music Toggle -->
+  <button class="music-toggle" id="musicBtn" title="تشغيل / إيقاف الموسيقى" onclick="toggleMusic()">♪</button>
+
+  <script>
+    // Accordion
+    function toggleAcc(btn) {
+      const item = btn.parentElement;
+      const body = item.querySelector('.acc-body');
+      const isOpen = item.classList.contains('open');
+
+      // Close others (optional - remove if you want multi-open)
+      document.querySelectorAll('.acc-item.open').forEach(el => {
+        if (el !== item) {
+          el.classList.remove('open');
+          el.querySelector('.acc-body').style.maxHeight = null;
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('open');
+        body.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Music
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let musicPlaying = false;
+
+    function tryPlayMusic() {
+      music.volume = 0.35;
+      music.play().then(() => {
+        musicPlaying = true;
+        musicBtn.classList.remove('muted');
+        musicBtn.textContent = '♪';
+      }).catch(() => {
+        // Autoplay blocked — wait for user click
+        musicBtn.classList.add('muted');
+        musicBtn.textContent = '♫';
+      });
+    }
+
+    function toggleMusic() {
+      if (musicPlaying) {
+        music.pause();
+        musicPlaying = false;
+        musicBtn.classList.add('muted');
+        musicBtn.textContent = '♫';
+      } else {
+        music.play();
+        musicPlaying = true;
+        musicBtn.classList.remove('muted');
+        musicBtn.textContent = '♪';
+      }
+    }
+
+    // Try autoplay on load + on first interaction
+    window.addEventListener('load', tryPlayMusic);
+    document.body.addEventListener('click', function once() {
+      if (!musicPlaying) tryPlayMusic();
+      document.body.removeEventListener('click', once);
+    }, { once: true });
+  </script>
+</body>
+</html>
